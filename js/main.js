@@ -54,9 +54,9 @@ console.log(getUserWithEmail(users, 'elmahead@omatom.com')); // {объект п
 // Задание 6
 // Получить массив пользователей попадающих в возрастную категорию от min до max лет (поле age).
 
-const getUsersWithAge = (users, min, max) => 
- users
-    .filter(({ age }) => age >= min && age <= max)
+const getUsersWithAge = (users, min, max) =>
+    users
+        .filter(({ age }) => age >= min && age <= max);
     
 
 console.log(getUsersWithAge(users, 20, 30)); // [объект Ross Vazquez, объект Elma Head, объект Carey Barr]
@@ -115,17 +115,25 @@ console.log(getNamesSortedByFriendsCount(users));
 // Получить массив всех умений всех пользователей(поле skills),
 // при этом не должно быть повторяющихся умений и они должны быть отсортированы в алфавитном порядке.
 
-const getSortedUniqueSkills = users => {
-    const userSkills = [...users].reduce(
-    (acc, { skills }) => acc.concat(skills),
-    []
-  );
-
-  return userSkills
-    .filter((element, index) => userSkills.indexOf(element) === index)
+  const getSortedUniqueSkills = users => {
+  return users
+    .flatMap( ob => ob.skills )
+    .filter( ( item, index, arr ) => arr.indexOf( item ) === index )
     .sort();
-  // твой код
 };
+
+// const getSortedUniqueSkills = (users) => {
+//   const userOfSkills = [...users].reduce(
+//     (acc, { skills }) => acc.concat(skills),
+//     []
+//   );
+
+//   return userOfSkills
+//     .filter((element, index) => userOfSkills.indexOf(element) === index)
+//     .sort();
+// };
+
+  
 
 console.log(getSortedUniqueSkills(users));
 // [ 'adipisicing', 'amet', 'anim', 'commodo', 'culpa', 'elit', 'ex', 
